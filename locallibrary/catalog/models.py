@@ -54,6 +54,15 @@ class Book(models.Model):
          """
          return reverse('book-detail', args=[str(self.id)])
 
+    def display_genre(self):
+        """
+        creates a string for the genre.  this is required to the genre in the admin (since its a many to many join)
+        """
+        return ', '.join([ genre.name for genre in self.genre.all()[:3] ])
+    display_genre.short_description = 'Genre'
+
+
+
 class BookInstance(models.Model):
     """
     Model for representing a specific copy of a book (i.e. that can be borrowed from the library).
