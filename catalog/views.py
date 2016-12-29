@@ -6,9 +6,16 @@ from .models import Book, Author, BookInstance, Genre
 class BookListView(generic.ListView):
     model = Book
 
-
 class BookDetailView(generic.DetailView):
     model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+    queryset = Author.objects.order_by('last_name')
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    context_object_name = 'author'
 
 
 def index(request):
